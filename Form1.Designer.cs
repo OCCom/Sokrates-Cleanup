@@ -48,12 +48,14 @@
             textBoxCleaned = new TextBox();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
+            checkBoxTauschen = new CheckBox();
             panelMenu.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
             // 
+            panelMenu.Controls.Add(checkBoxTauschen);
             panelMenu.Controls.Add(checkBoxAlle);
             panelMenu.Controls.Add(label1);
             panelMenu.Controls.Add(buttonSave);
@@ -71,7 +73,7 @@
             // checkBoxAlle
             // 
             checkBoxAlle.AutoSize = true;
-            checkBoxAlle.Location = new Point(648, 65);
+            checkBoxAlle.Location = new Point(853, 65);
             checkBoxAlle.Name = "checkBoxAlle";
             checkBoxAlle.Size = new Size(57, 24);
             checkBoxAlle.TabIndex = 9;
@@ -164,33 +166,33 @@
             // oeffnenToolStripMenuItem
             // 
             oeffnenToolStripMenuItem.Name = "oeffnenToolStripMenuItem";
-            oeffnenToolStripMenuItem.Size = new Size(224, 26);
+            oeffnenToolStripMenuItem.Size = new Size(195, 26);
             oeffnenToolStripMenuItem.Text = "Ö&ffnen";
             oeffnenToolStripMenuItem.Click += OeffnenToolStripMenuItem_Click;
             // 
             // speichernToolStripMenuItem
             // 
             speichernToolStripMenuItem.Name = "speichernToolStripMenuItem";
-            speichernToolStripMenuItem.Size = new Size(224, 26);
+            speichernToolStripMenuItem.Size = new Size(195, 26);
             speichernToolStripMenuItem.Text = "&Speichern";
             speichernToolStripMenuItem.Click += SpeichernToolStripMenuItem_Click;
             // 
             // speicherunterToolStripMenuItem
             // 
             speicherunterToolStripMenuItem.Name = "speicherunterToolStripMenuItem";
-            speicherunterToolStripMenuItem.Size = new Size(224, 26);
+            speicherunterToolStripMenuItem.Size = new Size(195, 26);
             speicherunterToolStripMenuItem.Text = "Speichern &unter";
             speicherunterToolStripMenuItem.Click += SpeicherunterToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(221, 6);
+            toolStripMenuItem1.Size = new Size(192, 6);
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(224, 26);
+            exitToolStripMenuItem.Size = new Size(195, 26);
             exitToolStripMenuItem.Text = "&Exit";
             // 
             // textBoxSource
@@ -220,6 +222,17 @@
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // checkBoxTauschen
+            // 
+            checkBoxTauschen.AutoSize = true;
+            checkBoxTauschen.Location = new Point(648, 65);
+            checkBoxTauschen.Name = "checkBoxTauschen";
+            checkBoxTauschen.Size = new Size(184, 24);
+            checkBoxTauschen.TabIndex = 10;
+            checkBoxTauschen.Text = "Tausche Klasse und SKz";
+            checkBoxTauschen.UseVisualStyleBackColor = true;
+            checkBoxTauschen.CheckedChanged += checkBoxTauschen_CheckedChanged;
             // 
             // Form1
             // 
@@ -261,5 +274,6 @@
         private SaveFileDialog saveFileDialog1;
         private OpenFileDialog openFileDialog1;
         private CheckBox checkBoxAlle;
+        private CheckBox checkBoxTauschen;
     }
 }

@@ -133,6 +133,33 @@ namespace Sokrates_Cleanup_for_AD
             return builder.ToString();
         }
 
+        // Tauscht die komplette 1. mit der 2. Spalte (durch ; getrennt) in jeder Zeile.
+        // Zeilen mit weniger als 2 Spalten bleiben unverändert.
+        private string TauscheKlasseSKZ(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            var lines = input.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var line = lines[i];
+                if (line.Length == 0)
+                    continue;
+
+                var fields = line.Split(';'); // behält leere Felder bei (z.B. doppelte ;;)
+
+                if (fields.Length >= 2)
+                {
+                    (fields[0], fields[1]) = (fields[1], fields[0]); // Swap
+                    lines[i] = string.Join(";", fields);
+                }
+            }
+
+            return string.Join(Environment.NewLine, lines);
+        }
+
         private int ParseOutput()
         {
             string workingText = textBoxSource.Text;
@@ -144,15 +171,18 @@ namespace Sokrates_Cleanup_for_AD
                 nichtszutun = false;
             }
 
-
             if (checkBoxDoppelnamen.Checked || checkBoxMehrereNamen.Checked)
             {
                 workingText = ExtractSubstringsBySeparators(workingText);
                 nichtszutun = false;
             }
 
+            if (checkBoxTauschen.Checked)
+            {
+                workingText = TauscheKlasseSKZ(workingText);
+                nichtszutun = false;
+            }
 
-            // Nur wenn keine Checkbox aktiv war → Originaltext übernehmen
             if (nichtszutun)
                 workingText = textBoxSource.Text;
 
@@ -240,9 +270,20 @@ namespace Sokrates_Cleanup_for_AD
 
         private void checkBoxAlle_CheckedChanged(object sender, EventArgs e)
         {
-            checkBoxDoppelnamen.Checked = true;
-            checkBoxMehrereNamen.Checked = true;
-            checkBoxUmlauteDiakrit.Checked = true;
+            if (checkBoxAlle.Checked)
+            {
+                checkBoxDoppelnamen.Checked = true;
+                checkBoxMehrereNamen.Checked = true;
+                checkBoxUmlauteDiakrit.Checked = true;
+                checkBoxTauschen.Checked = true;
+            }
+            else
+            {
+                checkBoxDoppelnamen.Checked = false;
+                checkBoxMehrereNamen.Checked = false;
+                checkBoxUmlauteDiakrit.Checked = false;
+                checkBoxTauschen.Checked = false;
+            }
         }
 
         private void checkBoxMehrereNamen_CheckedChanged(object sender, EventArgs e)
@@ -256,6 +297,11 @@ namespace Sokrates_Cleanup_for_AD
         }
 
         private void checkBoxUmlauteDiakrit_CheckedChanged(object sender, EventArgs e)
+        {
+            ParseOutput();
+        }
+
+        private void checkBoxTauschen_CheckedChanged(object sender, EventArgs e)
         {
             ParseOutput();
         }
